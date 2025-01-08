@@ -54,6 +54,11 @@ public partial class Level : Node2D
 			GameManager.LoadMainScene();
 		}
 
+		if (Input.IsActionJustPressed("reload"))
+		{
+			SetupLevel();
+		}
+
 		var md = GetInputDirection();
 		if (md != Vector2I.Zero)
 		{
@@ -180,6 +185,7 @@ public partial class Level : Node2D
 
 	private void SetupLevel()
 	{
+		_totalMoves = 0;
 		string lvlNum = GameManager.SelectedLevel;
 		LevelLayout levelLayout = GameData.GetLevelLayout(lvlNum);
 		ClearTiles();

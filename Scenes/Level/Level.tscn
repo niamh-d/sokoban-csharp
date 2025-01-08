@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b5nluvk0o6gm2"]
+[gd_scene load_steps=6 format=3 uid="uid://b5nluvk0o6gm2"]
 
 [ext_resource type="Script" path="res://Scenes/Level/Level.cs" id="1_cwk58"]
 [ext_resource type="TileSet" uid="uid://6edqj5ffjt7c" path="res://Resources/Tiles.tres" id="1_pa3l5"]
 [ext_resource type="Texture2D" uid="uid://gf8p4mv35tx" path="res://assets/Purple.png" id="2_8bary"]
 [ext_resource type="PackedScene" uid="uid://c8ec8ddujhey8" path="res://Scenes/Player/Player.tscn" id="3_jm6we"]
+[ext_resource type="PackedScene" uid="uid://b4diftefsij83" path="res://Scenes/Hud/Hud.tscn" id="5_te7cr"]
 
 [node name="Level" type="Node2D" node_paths=PackedStringArray("_floorTiles", "_wallTiles", "_targetTiles", "_boxTiles", "_tilesHolder", "_player", "_camera")]
 script = ExtResource("1_cwk58")
@@ -49,3 +50,7 @@ stretch_mode = 1
 [node name="Player" parent="." instance=ExtResource("3_jm6we")]
 visible = false
 position = Vector2(450, 273)
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="Hud" parent="CanvasLayer2" instance=ExtResource("5_te7cr")]
