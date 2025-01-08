@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5nluvk0o6gm2"]
+
+[ext_resource type="TileSet" uid="uid://6edqj5ffjt7c" path="res://Resources/Tiles.tres" id="1_pa3l5"]
+[ext_resource type="Texture2D" uid="uid://gf8p4mv35tx" path="res://assets/Purple.png" id="2_8bary"]
+[ext_resource type="PackedScene" uid="uid://c8ec8ddujhey8" path="res://Scenes/Player/Player.tscn" id="3_jm6we"]
+
+[node name="Level" type="Node2D"]
+
+[node name="Tiles" type="Node2D" parent="."]
+
+[node name="Floor" type="TileMapLayer" parent="Tiles"]
+tile_set = ExtResource("1_pa3l5")
+
+[node name="Wall" type="TileMapLayer" parent="Tiles"]
+tile_set = ExtResource("1_pa3l5")
+
+[node name="Targets" type="TileMapLayer" parent="Tiles"]
+tile_set = ExtResource("1_pa3l5")
+
+[node name="Boxes" type="TileMapLayer" parent="Tiles"]
+tile_set = ExtResource("1_pa3l5")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(470, 302)
+zoom = Vector2(1.5, 1.5)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8bary")
+stretch_mode = 1
+
+[node name="Player" parent="." instance=ExtResource("3_jm6we")]
+position = Vector2(450, 273)
