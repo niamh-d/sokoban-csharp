@@ -26,6 +26,7 @@ public partial class Hud : Control
 	private void OnNewGame(string levelNumStr)
 	{
 		_levelLabel.Text = levelNumStr;
+		_bestLabel.Text = ScoreSync.GetLevelBestScore(levelNumStr).ToString();
 		OnMoveMade(0);
 		Show();
 	}

@@ -106,8 +106,7 @@ public partial class Level : Node2D
 			if (!CellIsBox(tile)) return;
 		}
 
-		GD.Print($"Completed level with {_totalMoves} moves");
-		SignalManager.EmitOnLevelCompleted(GameManager.SelectedLevel, _totalMoves);
+		ScoreSync.LevelCompleted(GameManager.SelectedLevel, _totalMoves);
 	}
 
 	private void PlayerMove(Vector2I md)

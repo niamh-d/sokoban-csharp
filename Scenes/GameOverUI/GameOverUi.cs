@@ -23,10 +23,13 @@ public partial class GameOverUi : Control
 		_recordLabel.Hide();
 	}
 
-	private void OnLevelCompleted(string levelNumberStr, int moves, bool isBest)
+	private void OnLevelCompleted(string levelNumberStr, int moves, bool isNewBest)
 	{
 		Show();
 		_movesLabel.Text = $"{moves} Moves Taken";
-		// record label
+		if (isNewBest)
+		{
+			_recordLabel.Show();
+		}
 	}
 }

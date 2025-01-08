@@ -12,6 +12,7 @@ public partial class LevelButton : NinePatchRect
 	{
 		GuiInput += OnGuiInput;
 		_levelLabel.Text = _lvlNumStr;
+		if (ScoreSync.HasLevelScore(_lvlNumStr)) _checkMark.Show();
 	}
 
 	private void OnGuiInput(InputEvent e)
