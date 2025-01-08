@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Godot;
 
 public partial class Level : Node2D
@@ -45,6 +46,10 @@ public partial class Level : Node2D
 
 	public override void _Process(double delta)
 	{
+		if (Input.IsActionJustPressed("exit"))
+		{
+			GameManager.LoadMainScene();
+		}
 	}
 
 	private Vector2I GetAtlasCoordForLayerName(TileLayerNames layerName)
@@ -85,7 +90,7 @@ public partial class Level : Node2D
 
 	private void SetupLevel()
 	{
-		string ln = "16";
+		string ln = GameManager.SelectedLevel;
 		LevelLayout levelLayout = GameData.GetLevelLayout(ln);
 		ClearTiles();
 
@@ -97,10 +102,18 @@ public partial class Level : Node2D
 		MoveCamera();
 	}
 
-	private void MoveCamera()
+	private async void MoveCamera()
 	{
 		var usedRect = _floorTiles.GetUsedRect();
 		Vector2 center = (usedRect.Position + usedRect.Size / 2) * _tileSize;
 		_camera.Position = center;
+		await Task.Delay(32);
+		Reveal();
+	}
+
+	private void Reveal()
+	{
+		_tilesHolder.Show();
+		_player.Show();
 	}
 }

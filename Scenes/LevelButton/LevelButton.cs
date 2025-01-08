@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class LevelButton : NinePatchRect
@@ -9,7 +10,16 @@ public partial class LevelButton : NinePatchRect
 
 	public override void _Ready()
 	{
+		GuiInput += OnGuiInput;
 		_levelLabel.Text = _lvlNumStr;
+	}
+
+	private void OnGuiInput(InputEvent e)
+	{
+		if (e.IsActionPressed("select"))
+		{
+			SignalManager.EmitOnLevelSelected(_lvlNumStr);
+		}
 	}
 
 	public void SetLevelNumStr(string lvlNumStr)
