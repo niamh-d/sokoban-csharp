@@ -1,0 +1,86 @@
+[gd_scene load_steps=6 format=3 uid="uid://b6mkhf0rrvy4a"]
+
+[ext_resource type="Texture2D" uid="uid://bvcyv64l58lnx" path="res://assets/panel_beigeLight.png" id="1_81x8v"]
+[ext_resource type="Script" path="res://Scenes/GameOverUI/GameOverUi.cs" id="1_wsu1u"]
+[ext_resource type="LabelSettings" uid="uid://iubd5adyqn7n" path="res://assets/LG_Title_96.tres" id="2_x6t2n"]
+[ext_resource type="LabelSettings" uid="uid://cax5bcpx5u5rv" path="res://assets/LG_Blue_48.tres" id="3_kx6lq"]
+[ext_resource type="LabelSettings" uid="uid://bgrh87meg8gx1" path="res://assets/LG_Red_48.tres" id="4_5jnoh"]
+
+[node name="GameOverUI" type="Control" node_paths=PackedStringArray("_recordLabel", "_movesLabel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wsu1u")
+_recordLabel = NodePath("MC/NinePatchRect/MC/VB/RecordLabel")
+_movesLabel = NodePath("MC/NinePatchRect/MC/VB/MovesLabel")
+
+[node name="MC" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MC"]
+layout_mode = 2
+texture = ExtResource("1_81x8v")
+patch_margin_left = 9
+patch_margin_top = 9
+patch_margin_right = 9
+patch_margin_bottom = 9
+
+[node name="MC" type="MarginContainer" parent="MC/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 96
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VB" type="VBoxContainer" parent="MC/NinePatchRect/MC"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MC/NinePatchRect/MC/VB"]
+layout_mode = 2
+text = "LEVEL COMPLETE"
+label_settings = ExtResource("2_x6t2n")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control2" type="Control" parent="MC/NinePatchRect/MC/VB"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MovesLabel" type="Label" parent="MC/NinePatchRect/MC/VB"]
+layout_mode = 2
+text = "XXX MOVES TAKEN"
+label_settings = ExtResource("3_kx6lq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control3" type="Control" parent="MC/NinePatchRect/MC/VB"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RecordLabel" type="Label" parent="MC/NinePatchRect/MC/VB"]
+layout_mode = 2
+text = "NEW RECORD"
+label_settings = ExtResource("4_5jnoh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control4" type="Control" parent="MC/NinePatchRect/MC/VB"]
+layout_mode = 2
+size_flags_vertical = 3
