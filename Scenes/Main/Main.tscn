@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://xwiv7a35w174" path="res://assets/Gray.png" id="2_7myhb"]
 [ext_resource type="LabelSettings" uid="uid://iubd5adyqn7n" path="res://assets/LG_Title_96.tres" id="3_xmyoc"]
 
-[node name="Main" type="Control"]
+[node name="Main" type="Control" node_paths=PackedStringArray("_lvlBtnGrid")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,6 +12,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_oa4p5")
+_lvlBtnGrid = NodePath("MC/VB/LevelButtonsGrid")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
@@ -48,6 +49,6 @@ vertical_alignment = 1
 [node name="LevelButtonsGrid" type="GridContainer" parent="MC/VB"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/h_separation = 12
-theme_override_constants/v_separation = 12
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
 columns = 6
