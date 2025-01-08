@@ -18,6 +18,7 @@ public partial class Level : Node2D
 
 	private Dictionary<TileLayerNames, TileMapLayer> _layerMap;
 	private int _tileSize = 32;
+	private Vector2I _playerTile = Vector2I.Zero;
 
 	public override void _Ready()
 	{
@@ -30,6 +31,7 @@ public partial class Level : Node2D
 	{
 		Vector2 newPos = _tilesHolder.Position + tileCoord * _tileSize;
 		_player.Position = newPos;
+		_playerTile = tileCoord;
 	}
 
 	private void SetUpLayerMap()
@@ -50,6 +52,78 @@ public partial class Level : Node2D
 		{
 			GameManager.LoadMainScene();
 		}
+
+		var md = GetInputDirection();
+		if (md != Vector2I.Zero)
+		{
+			PlayerMove(md);
+		}
+	}
+
+	private bool BoxCanBeMoved(Vector2I boxTile, Vector2I direction)
+	{
+		return CellIsEmpty(boxTile + direction);
+	}
+
+	private bool CellIsEmpty(Vector2I cell)
+	{
+		return !CellIsBox(cell) && !CellIsWall(cell);
+	}
+
+	private void MoveBox(Vector2I boxTile, Vector2I direction)
+	{
+		Vector2I newTile = boxTile + direction;
+
+		_boxTiles.EraseCell(boxTile);
+
+		var tln = TileLayerNames.Box;
+
+		if (_targetTiles.GetUsedCells().Contains(newTile)) tln = TileLayerNames.TargetBox;
+
+		_boxTiles.SetCell(newTile, SOURCE_ID, GetAtlasCoordForLayerName(tln));
+	}
+
+	private bool CellIsBox(Vector2I cell)
+	{
+		return _boxTiles.GetUsedCells().Contains(cell);
+	}
+
+	private bool CellIsWall(Vector2I cell)
+	{
+		return _wallTiles.GetUsedCells().Contains(cell);
+	}
+
+	private void PlayerMove(Vector2I md)
+	{
+		Vector2I newTile = _playerTile + md;
+
+		if (CellIsWall(newTile)) return;
+		if (CellIsBox(newTile) && !BoxCanBeMoved(newTile, md)) return;
+
+		if (md == Vector2I.Left)
+		{
+			_player.FlipH = true;
+		}
+		else if (md == Vector2I.Right)
+		{
+			_player.FlipH = false;
+		}
+
+		if (CellIsBox(newTile))
+		{
+			MoveBox(newTile, md);
+		}
+
+		PlacePlayerOnTile(newTile);
+	}
+
+	private Vector2I GetInputDirection()
+	{
+		if (Input.IsActionJustPressed("left")) return Vector2I.Left;
+		if (Input.IsActionJustPressed("right")) return Vector2I.Right;
+		if (Input.IsActionJustPressed("up")) return Vector2I.Up;
+		if (Input.IsActionJustPressed("down")) return Vector2I.Down;
+		return Vector2I.Zero;
 	}
 
 	private Vector2I GetAtlasCoordForLayerName(TileLayerNames layerName)
