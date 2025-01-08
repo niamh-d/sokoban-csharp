@@ -5,13 +5,15 @@
 [ext_resource type="Texture2D" uid="uid://gf8p4mv35tx" path="res://assets/Purple.png" id="2_8bary"]
 [ext_resource type="PackedScene" uid="uid://c8ec8ddujhey8" path="res://Scenes/Player/Player.tscn" id="3_jm6we"]
 
-[node name="Level" type="Node2D" node_paths=PackedStringArray("_floorTiles", "_wallTiles", "_targetTiles", "_boxTiles", "_tilesHolder")]
+[node name="Level" type="Node2D" node_paths=PackedStringArray("_floorTiles", "_wallTiles", "_targetTiles", "_boxTiles", "_tilesHolder", "_player", "_camera")]
 script = ExtResource("1_cwk58")
 _floorTiles = NodePath("Tiles/Floor")
 _wallTiles = NodePath("Tiles/Wall")
 _targetTiles = NodePath("Tiles/Targets")
 _boxTiles = NodePath("Tiles/Boxes")
 _tilesHolder = NodePath("Tiles")
+_player = NodePath("Player")
+_camera = NodePath("Camera2D")
 
 [node name="Tiles" type="Node2D" parent="."]
 

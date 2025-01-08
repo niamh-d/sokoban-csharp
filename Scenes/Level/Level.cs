@@ -8,16 +8,27 @@ public partial class Level : Node2D
 	[Export] private TileMapLayer _wallTiles;
 	[Export] private TileMapLayer _targetTiles;
 	[Export] private TileMapLayer _boxTiles;
+
 	[Export] private Node2D _tilesHolder;
+	[Export] private AnimatedSprite2D _player;
+	[Export] private Camera2D _camera;
 
 	private const int SOURCE_ID = 0;
 
 	private Dictionary<TileLayerNames, TileMapLayer> _layerMap;
+	private int _tileSize = 32;
 
 	public override void _Ready()
 	{
 		SetUpLayerMap();
 		CallDeferred(MethodName.SetupLevel);
+		_tileSize = _floorTiles.TileSet.TileSize.X;
+	}
+
+	private void PlacePlayerOnTile(Vector2I tileCoord)
+	{
+		Vector2 newPos = _tilesHolder.Position + tileCoord * _tileSize;
+		_player.Position = newPos;
 	}
 
 	private void SetUpLayerMap()
@@ -74,7 +85,7 @@ public partial class Level : Node2D
 
 	private void SetupLevel()
 	{
-		string ln = "2";
+		string ln = "16";
 		LevelLayout levelLayout = GameData.GetLevelLayout(ln);
 		ClearTiles();
 
@@ -82,5 +93,14 @@ public partial class Level : Node2D
 		{
 			SetupLayer(layerName, levelLayout);
 		}
+		PlacePlayerOnTile(levelLayout.PlayerStart.ToVector2I());
+		MoveCamera();
+	}
+
+	private void MoveCamera()
+	{
+		var usedRect = _floorTiles.GetUsedRect();
+		Vector2 center = (usedRect.Position + usedRect.Size / 2) * _tileSize;
+		_camera.Position = center;
 	}
 }

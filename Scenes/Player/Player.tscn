@@ -42,3 +42,4 @@ animations = [{
 sprite_frames = SubResource("SpriteFrames_5ewob")
 animation = &"idle"
 autoplay = "idle"
+offset = Vector2(18, 12)
