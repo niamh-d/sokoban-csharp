@@ -26,7 +26,7 @@ public partial class SignalManager : Node
         Instance.EmitSignal(SignalName.OnLevelSelected, levelNumberStr);
     }
 
-    public static void EmitOnLevelCompleted(string levelNumberStr, int moves, bool isBest)
+    public static void EmitOnLevelCompleted(string levelNumberStr, int moves, bool isBest = false)
     {
         Instance.EmitSignal(SignalName.OnLevelCompleted, levelNumberStr, moves, isBest);
     }

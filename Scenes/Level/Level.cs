@@ -19,6 +19,7 @@ public partial class Level : Node2D
 	private Dictionary<TileLayerNames, TileMapLayer> _layerMap;
 	private int _tileSize = 32;
 	private Vector2I _playerTile = Vector2I.Zero;
+	private int _totalMoves = 0;
 
 	public override void _Ready()
 	{
@@ -93,6 +94,17 @@ public partial class Level : Node2D
 		return _wallTiles.GetUsedCells().Contains(cell);
 	}
 
+	private void CheckGameState()
+	{
+		foreach (var tile in _targetTiles.GetUsedCells())
+		{
+			if (!CellIsBox(tile)) return;
+		}
+
+		GD.Print($"Completed level with {_totalMoves} moves");
+		SignalManager.EmitOnLevelCompleted(GameManager.SelectedLevel, _totalMoves);
+	}
+
 	private void PlayerMove(Vector2I md)
 	{
 		Vector2I newTile = _playerTile + md;
@@ -114,7 +126,11 @@ public partial class Level : Node2D
 			MoveBox(newTile, md);
 		}
 
+		_totalMoves++;
+		SignalManager.EmitOnMoveMade(_totalMoves);
+
 		PlacePlayerOnTile(newTile);
+		CheckGameState();
 	}
 
 	private Vector2I GetInputDirection()
@@ -164,8 +180,8 @@ public partial class Level : Node2D
 
 	private void SetupLevel()
 	{
-		string ln = GameManager.SelectedLevel;
-		LevelLayout levelLayout = GameData.GetLevelLayout(ln);
+		string lvlNum = GameManager.SelectedLevel;
+		LevelLayout levelLayout = GameData.GetLevelLayout(lvlNum);
 		ClearTiles();
 
 		foreach (var layerName in _layerMap.Keys)
@@ -174,6 +190,7 @@ public partial class Level : Node2D
 		}
 		PlacePlayerOnTile(levelLayout.PlayerStart.ToVector2I());
 		MoveCamera();
+		SignalManager.EmitOnNewGame(lvlNum);
 	}
 
 	private async void MoveCamera()
