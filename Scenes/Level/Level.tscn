@@ -1,10 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://b5nluvk0o6gm2"]
+[gd_scene load_steps=5 format=3 uid="uid://b5nluvk0o6gm2"]
 
+[ext_resource type="Script" path="res://Scenes/Level/Level.cs" id="1_cwk58"]
 [ext_resource type="TileSet" uid="uid://6edqj5ffjt7c" path="res://Resources/Tiles.tres" id="1_pa3l5"]
 [ext_resource type="Texture2D" uid="uid://gf8p4mv35tx" path="res://assets/Purple.png" id="2_8bary"]
 [ext_resource type="PackedScene" uid="uid://c8ec8ddujhey8" path="res://Scenes/Player/Player.tscn" id="3_jm6we"]
 
-[node name="Level" type="Node2D"]
+[node name="Level" type="Node2D" node_paths=PackedStringArray("_floorTiles", "_wallTiles", "_targetTiles", "_boxTiles", "_tilesHolder")]
+script = ExtResource("1_cwk58")
+_floorTiles = NodePath("Tiles/Floor")
+_wallTiles = NodePath("Tiles/Wall")
+_targetTiles = NodePath("Tiles/Targets")
+_boxTiles = NodePath("Tiles/Boxes")
+_tilesHolder = NodePath("Tiles")
 
 [node name="Tiles" type="Node2D" parent="."]
 
@@ -21,7 +28,7 @@ tile_set = ExtResource("1_pa3l5")
 tile_set = ExtResource("1_pa3l5")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(470, 302)
+position = Vector2(345, 265)
 zoom = Vector2(1.5, 1.5)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
