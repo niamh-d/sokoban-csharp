@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://db3fd785uyc3s"]
+
+[ext_resource type="Texture2D" uid="uid://bhqbk3awfbj4c" path="res://assets/blue_panel.png" id="1_s80vg"]
+[ext_resource type="LabelSettings" uid="uid://dt4d8t41tnpa1" path="res://assets/GM_white_32.tres" id="2_w33tr"]
+[ext_resource type="Texture2D" uid="uid://b510in0wercd" path="res://assets/green_checkmark.png" id="3_kahab"]
+
+[node name="LevelButton" type="NinePatchRect"]
+custom_minimum_size = Vector2(64, 64)
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_s80vg")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="LevelLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "00"
+label_settings = ExtResource("2_w33tr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CheckMark" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 25.0
+offset_bottom = 24.0
+texture = ExtResource("3_kahab")

@@ -1,6 +1,6 @@
 [gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://dt4d8t41tnpa1"]
 
-[ext_resource type="FontFile" uid="uid://lfay883qq2kb" path="res://assets/gemunu-libre-v8-latin-700.ttf" id="1_5q7q3"]
+[ext_resource type="FontFile" uid="uid://d3n8xuymxcvtx" path="res://assets/gemunu-libre-v8-latin-700.ttf" id="1_5q7q3"]
 
 [resource]
 font = ExtResource("1_5q7q3")
